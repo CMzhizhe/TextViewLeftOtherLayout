@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <com.gxx.textlayoutapplication.weiget.TextViewLeftOtherLayout
+        android:id="@+id/tv_other_textview_left_other_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tv_leo_left_background="@drawable/shape_rectangle_solid_red_d0372a_corner50"
+        app:tv_leo_left_paddingleft="8dp"
+        app:tv_leo_left_paddingright="8dp"
+        app:tv_leo_left_textcolor="@color/green_48D2C5"
+        app:tv_leo_left_textsize="14"
+        app:tv_leo_right_maxlines="2"
+        app:tv_leo_right_textcolor="@color/purple_200"
+        app:tv_leo_right_textsize="18" />
+
+</FrameLayout>
