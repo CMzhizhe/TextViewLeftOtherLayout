@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.text.style.LeadingMarginSpan;
 import android.util.AttributeSet;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -133,18 +134,75 @@ public class TextViewLeftOtherLayout extends FrameLayout {
             rightTextViewTexTValue = "";
         }
 
-        leftTextView.setText(leftTextViewTextValue);
-        final SpannableString spannableString = new SpannableString(rightTextViewTexTValue);
-        leftTextView.post(new Runnable() {
-            @Override
-            public void run() {
-                int dis = leftRightDistance + leftTextView.getWidth();
-                LeadingMarginSpan.Standard what = new LeadingMarginSpan.Standard(dis, 0);
-                spannableString.setSpan(what, 0, spannableString.length(), SpannableString.SPAN_INCLUSIVE_INCLUSIVE);
-                rightTextView.setText(spannableString);
-            }
-        });
+        if (!TextUtils.isEmpty(leftTextViewTextValue)){
+            leftTextView.setVisibility(View.VISIBLE);
+            leftTextView.setText(leftTextViewTextValue);
+            final SpannableString spannableString = new SpannableString(rightTextViewTexTValue);
+            leftTextView.post(new Runnable() {
+                @Override
+                public void run() {
+                    int dis = leftRightDistance + leftTextView.getWidth();
+                    LeadingMarginSpan.Standard what = new LeadingMarginSpan.Standard(dis, 0);
+                    spannableString.setSpan(what, 0, spannableString.length(), SpannableString.SPAN_INCLUSIVE_INCLUSIVE);
+                    rightTextView.setText(spannableString);
+                }
+            });
+        }else {
+            leftTextView.setVisibility(View.GONE);
+            SpannableString spannableString = new SpannableString(rightTextViewTexTValue);
+            LeadingMarginSpan.Standard what = new LeadingMarginSpan.Standard(0, 0);
+            spannableString.setSpan(what, 0, spannableString.length(), SpannableString.SPAN_INCLUSIVE_INCLUSIVE);
+            rightTextView.setText(spannableString);
+        }
+    }
 
+    /**
+     * @date 创建时间:2021/4/27 0027
+     * @auther gaoxiaoxiong
+     * @Descriptiion 设置左右的文字 + 设置背景
+     **/
+    public void setLeftRightTextValue(String leftTextViewTextValue, String rightTextViewTexTValue,Drawable leftTextViewBackground){
+        if (TextUtils.isEmpty(leftTextViewTextValue)) {
+            leftTextViewTextValue = "";
+        }
+
+        if (TextUtils.isEmpty(rightTextViewTexTValue)) {
+            rightTextViewTexTValue = "";
+        }
+
+        if (!TextUtils.isEmpty(leftTextViewTextValue)){
+            if (leftTextViewBackground!=null){
+                leftTextView.setBackground(leftTextViewBackground);
+            }
+            leftTextView.setVisibility(View.VISIBLE);
+            leftTextView.setText(leftTextViewTextValue);
+            final SpannableString spannableString = new SpannableString(rightTextViewTexTValue);
+            leftTextView.post(new Runnable() {
+                @Override
+                public void run() {
+                    int dis = leftRightDistance + leftTextView.getWidth();
+                    LeadingMarginSpan.Standard what = new LeadingMarginSpan.Standard(dis, 0);
+                    spannableString.setSpan(what, 0, spannableString.length(), SpannableString.SPAN_INCLUSIVE_INCLUSIVE);
+                    rightTextView.setText(spannableString);
+                }
+            });
+        }else {
+            leftTextView.setVisibility(View.GONE);
+            SpannableString spannableString = new SpannableString(rightTextViewTexTValue);
+            LeadingMarginSpan.Standard what = new LeadingMarginSpan.Standard(0, 0);
+            spannableString.setSpan(what, 0, spannableString.length(), SpannableString.SPAN_INCLUSIVE_INCLUSIVE);
+            rightTextView.setText(spannableString);
+        }
+
+    }
+
+
+    public TextView getLeftTextView() {
+        return leftTextView;
+    }
+
+    public TextView getRightTextView() {
+        return rightTextView;
     }
 
 }
